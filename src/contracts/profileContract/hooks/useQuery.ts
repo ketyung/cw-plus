@@ -35,7 +35,7 @@ export default function useQuery() {
 
         await query( contractAddress, wallet, 
             {"followers":{ "key" : "profile_"+ (wallet?.walletAddress ?? ""),
-            "start_after" : startAfter, "limit" : limit, 
+            "start_after" : "fwr_"+wallet?.walletAddress+"_"+startAfter, "limit" : limit, 
             }} ,(obj)=>{
 
             if (obj instanceof Error){
@@ -62,7 +62,7 @@ export default function useQuery() {
 
         await query( contractAddress, wallet, 
             {"followings":{ "key" : "profile_"+ (wallet?.walletAddress ?? ""),
-            "start_after" : startAfter, "limit" : limit, 
+            "start_after" : "flw_"+wallet?.walletAddress+"_"+startAfter, "limit" : limit, 
             }} ,(obj)=>{
 
             if (obj instanceof Error){
@@ -81,6 +81,47 @@ export default function useQuery() {
         
     }
 
-    return {queryProfile, queryProfileFollowers, queryProfileFollowings} as const;
+    const followersCount = async ( completion? : (count : number) => void) =>{
+
+        await query( contractAddress, wallet, 
+            {"followers_count":{ "key" : "profile_"+ (wallet?.walletAddress ?? "")}} ,(obj)=>{
+
+            if (obj instanceof Error){
+
+                if ( completion )
+                    completion(0);
+            }
+            else {
+
+                if ( completion )
+                    completion (obj.count);
+                
+            }
+
+        });
+    }
+
+    const followingsCount = async ( completion? : (count : number) => void) =>{
+
+        await query( contractAddress, wallet, 
+            {"followings_count":{ "key" : "profile_"+ (wallet?.walletAddress ?? "")}} ,(obj)=>{
+
+            if (obj instanceof Error){
+
+                if ( completion )
+                    completion(0);
+            }
+            else {
+
+                if ( completion )
+                    completion (obj.count);
+                
+            }
+
+        });
+    }
+
+    return {queryProfile, queryProfileFollowers, queryProfileFollowings, 
+        followersCount, followingsCount} as const;
 
 }
