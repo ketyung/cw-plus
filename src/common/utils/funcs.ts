@@ -41,7 +41,7 @@ export const copy = (copyText : string ) =>{
     navigator.clipboard.writeText(copyText);
 }
 
-export const shortenStringTo = (str : string, length : number = 32, inBetween : string = "...") => {
+export const shortenStringTo = (str : string, length : number = 12, inBetween : string = "...") => {
 
     if ( str.length <= length){
         return str ;

@@ -43,7 +43,7 @@ export const MenuView : React.FC = () => {
                 copy(connectedWallet?.walletAddress ?? "");
             }}><CopyOutlined/></Button></span>
            <span style={{color:"white",marginLeft:"10px",float:"left"}}> 
-            {shortenStringTo(connectedWallet?.walletAddress ?? "", 16)}</span>
+            {shortenStringTo(connectedWallet?.walletAddress ?? "")}</span>
            { connectedWallet ? 
            <span style={{color:"white", float:"left", marginLeft:"10px"}}>Balance : {balance}</span>
            : <></>}

@@ -1,0 +1,10 @@
+.editProfileView {
+    max-width:450px;
+    background-color:black ;
+    border-radius: 20px;
+    color:white;
+    text-align: left;
+    padding: 10px;
+    margin-top: 10px;
+    margin-left: 10px;
+}
