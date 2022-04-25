@@ -8,9 +8,9 @@ export default function useQuery() {
 
     const wallet = useConnectedWallet();
 
-    const queryProfile = (completion? : (profile : Profile ) => void) =>{
+    const queryProfile = async  (completion? : (profile : Profile ) => void) =>{
 
-        query( contractAddress, wallet, {"profile":{ "key" : "profile_"+ (wallet?.walletAddress ?? "")  }} ,(obj)=>{
+        await query( contractAddress, wallet, {"profile":{ "key" : "profile_"+ (wallet?.walletAddress ?? "")  }} ,(obj)=>{
 
             if (obj instanceof Error){
 
@@ -28,12 +28,12 @@ export default function useQuery() {
     }
 
 
-    const queryProfileFollowers = (
+    const queryProfileFollowers = async (
         startAfter? : string, 
         limit? : number, 
         completion? : (followers : ProfileFollower[]) => void) =>{
 
-        query( contractAddress, wallet, 
+        await query( contractAddress, wallet, 
             {"followers":{ "key" : "profile_"+ (wallet?.walletAddress ?? ""),
             "start_after" : startAfter, "limit" : limit, 
             }} ,(obj)=>{
@@ -55,12 +55,12 @@ export default function useQuery() {
     }
 
 
-    const queryProfileFollowings = (
+    const queryProfileFollowings = async (
         startAfter? : string, 
         limit? : number, 
         completion? : (followings : ProfileFollowing[]) => void) =>{
 
-        query( contractAddress, wallet, 
+        await query( contractAddress, wallet, 
             {"followings":{ "key" : "profile_"+ (wallet?.walletAddress ?? ""),
             "start_after" : startAfter, "limit" : limit, 
             }} ,(obj)=>{
