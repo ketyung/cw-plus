@@ -1,7 +1,6 @@
 import { FC, useEffect, useState } from "react";
 import { Input, Button } from "antd";
 import { error } from "../../../common/utils/Mesg";
-import { Profile } from "../../../contracts/profileContract/models";
 import { TxInfoView } from "../../../common/views/TxInfoView";
 import useQuery from "../../../contracts/profileContract/hooks/useQuery";
 import useExec from "../../../contracts/profileContract/hooks/useExec";
@@ -56,7 +55,7 @@ export const EditProfileView : FC <EditProfileProps> = ({
         <tr>
             <td align="left" valign="top"  style={{width:"30%"}}><b>Bio</b></td>
             <td align="left" valign="top"  style={{width:"70%"}}><TextArea 
-            cols={60} rows={3} style={{color:"black"}} value={bio}/></td>
+            cols={60} rows={2} style={{color:"black"}} value={bio}/></td>
         </tr>
         <tr>
             <td align="left" valign="top"  style={{width:"30%"}}><b>Location</b></td>
@@ -67,7 +66,6 @@ export const EditProfileView : FC <EditProfileProps> = ({
             <td align="center" colSpan={2}>
                 <Button shape="round" onClick={async ()=>{
 
-                   
                     await updateProfile({
                         name : name, 
                         wallet_address : wallet?.walletAddress ?? "",
