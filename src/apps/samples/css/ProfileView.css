@@ -23,3 +23,25 @@
     margin-left: 10px;
     display:inline-block;
 }
+
+.profileView .countView {
+
+    width:100px;
+    background-color: #236 ;
+    border-radius: 20px;
+    color:white;
+    display: inline-block;
+    margin:10px;
+    text-align: center;
+}
+
+.profileView .countView .count {
+
+    font-size: 20pt;
+}
+
+
+.profileView .countView .text {
+
+    font-size: 9pt;
+}

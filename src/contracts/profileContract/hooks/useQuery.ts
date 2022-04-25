@@ -84,7 +84,7 @@ export default function useQuery() {
         
     }
 
-    const followersCount = async ( completion? : (count : number) => void, defaultValue : number = 100000 ) =>{
+    const followersCount = async ( completion? : (count : number) => void, defaultValue : number = 100 ) =>{
 
         await query( contractAddress, wallet, 
             {"followers_count":{ "key" : profileKey }} ,(obj)=>{
@@ -104,7 +104,7 @@ export default function useQuery() {
         });
     }
 
-    const followingsCount = async ( completion? : (count : number) => void,  defaultValue : number = 100000) =>{
+    const followingsCount = async ( completion? : (count : number) => void,  defaultValue : number = 1000) =>{
 
         await query( contractAddress, wallet, 
             {"followings_count":{ "key" : profileKey }} ,(obj)=>{
