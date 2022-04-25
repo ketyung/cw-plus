@@ -14,6 +14,10 @@ export const toMicro = (num : number ) => {
 }
 
 
+export const fromMicro = (num : number ) => {
+  return num / Math.pow(10,6); 
+}
+
 export const addDecimals = ( num : number, decimals : number ) : string =>{
 
   let v = num * Math.pow(10, decimals);
@@ -36,3 +40,17 @@ export const copy = (copyText : string ) =>{
  
     navigator.clipboard.writeText(copyText);
 }
+
+export const shortenStringTo = (str : string, length : number = 32, inBetween : string = "...") => {
+
+    if ( str.length <= length){
+        return str ;
+    }
+
+    const halfLen = length / 2;
+
+    return (
+      str.substring(0, halfLen) + inBetween + 
+      str.substring(str.length - halfLen, str.length)
+    );
+};

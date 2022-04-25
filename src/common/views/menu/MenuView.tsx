@@ -1,5 +1,9 @@
 import React,{useState, useEffect} from 'react';
 import { useConnectedWallet, useLCDClient } from '@terra-money/wallet-provider';
+import { shortenStringTo, fromMicro, copy } from '../../utils/funcs';
+import { Button } from 'antd';
+import { CopyOutlined } from '@ant-design/icons';
+
 export const MenuView : React.FC = () => {
 
     const connectedWallet = useConnectedWallet();
@@ -17,7 +21,7 @@ export const MenuView : React.FC = () => {
                 let allCoins = coins.toArray().filter((c)=> c.denom === "uluna" );
                 
                 if ( allCoins.length > 0)
-                    setBalance(allCoins[0].amount + " " + allCoins[0].denom);
+                    setBalance(fromMicro(allCoins[0].amount.toNumber()).toFixed(3) + " luna" );//+ allCoins[0].denom);
 
                 // console.log("coins::", allCoins);
             });
@@ -33,8 +37,13 @@ export const MenuView : React.FC = () => {
 
 
     return  <span>
-        <div style={{backgroundColor:"#789"}}>
-           <span style={{color:"white",marginLeft:"10px", float:"left"}}>{connectedWallet?.walletAddress}</span>
+        <div style={{backgroundColor:"#789", marginTop:"10px"}}>
+             <span style={{color:"white",marginLeft:"10px",float:"left"}}> 
+             <Button shape="circle" style={{width:"20px",height:"30px"}} onClick={()=>{
+                copy(connectedWallet?.walletAddress ?? "");
+            }}><CopyOutlined/></Button></span>
+           <span style={{color:"white",marginLeft:"10px",float:"left"}}> 
+            {shortenStringTo(connectedWallet?.walletAddress ?? "", 16)}</span>
            { connectedWallet ? 
            <span style={{color:"white", float:"left", marginLeft:"10px"}}>Balance : {balance}</span>
            : <></>}
