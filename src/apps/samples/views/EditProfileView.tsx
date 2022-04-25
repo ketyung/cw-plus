@@ -23,7 +23,7 @@ export const EditProfileView : FC <EditProfileProps> = ({
 
     const {queryProfile} = useQuery();
 
-    const {updateProfile} = useExec();
+    const {updateProfile, loading} = useExec();
 
     const wallet = useConnectedWallet();
 
@@ -34,6 +34,8 @@ export const EditProfileView : FC <EditProfileProps> = ({
         queryProfile((p)=>{
 
             tmpProfile = p; 
+
+            console.log("tmpPro::", tmpProfile);
         });
 
     },[wallet?.walletAddress]);
@@ -43,15 +45,18 @@ export const EditProfileView : FC <EditProfileProps> = ({
     <table style={{width:"400px", background:"transparent"}} cellPadding={5} cellSpacing={5}>
         <tr>
             <td align="left" valign="top"  style={{width:"30%"}}><b>Name</b></td>
-            <td align="left" valign="top"  style={{width:"70%"}}><Input type="text" style={{maxWidth:"200px"}} value ={tmpProfile?.name}/></td>
+            <td align="left" valign="top"  style={{width:"70%"}}><Input type="text" 
+            style={{maxWidth:"200px", color:"black"}} value ={tmpProfile?.name}/></td>
         </tr>
         <tr>
             <td align="left" valign="top"  style={{width:"30%"}}><b>Bio</b></td>
-            <td align="left" valign="top"  style={{width:"70%"}}><TextArea cols={60} rows={3} value={tmpProfile?.bio}/></td>
+            <td align="left" valign="top"  style={{width:"70%"}}><TextArea 
+            cols={60} rows={3} style={{color:"black"}} value={tmpProfile?.bio}/></td>
         </tr>
         <tr>
             <td align="left" valign="top"  style={{width:"30%"}}><b>Location</b></td>
-            <td align="left" valign="top"  style={{width:"70%"}}><Input type="text" style={{maxWidth:"120px"}} value={tmpProfile?.bio}/></td>
+            <td align="left" valign="top"  style={{width:"70%"}}><Input type="text" 
+            style={{maxWidth:"120px", color:"black"}} value={tmpProfile?.bio}/></td>
         </tr>
         <tr>
             <td align="center" colSpan={2}>
@@ -81,6 +86,6 @@ export const EditProfileView : FC <EditProfileProps> = ({
             </td>
         </tr>
     </table>
-    <TxInfoView txInfo={txHash}/>
+    <TxInfoView txInfo={txHash} loading={loading}/>
     </div>
 }
