@@ -43,3 +43,18 @@ export interface ProfileMediaType {
 
     date_updated? : Date, 
 }
+
+export interface ProfileFollower {
+
+    wallet_address : string, 
+
+    date_created? : Date, 
+}
+
+export interface ProfileFollowing {
+
+    wallet_address : string, 
+
+    date_created? : Date, 
+}
+

@@ -1,7 +1,7 @@
 import { useConnectedWallet } from "@terra-money/wallet-provider";
 import { query } from "../../../common/utils";
 import { contractAddress } from "../config";
-import { Profile } from "../models";
+import { Profile, ProfileFollower, ProfileFollowing } from "../models";
 import { DEFAULT_PROFILE } from "../models/defaults";
 
 export default function useQuery() {
@@ -25,9 +25,62 @@ export default function useQuery() {
             }
 
         });
+    }
+
+
+    const queryProfileFollowers = (
+        startAfter? : string, 
+        limit? : number, 
+        completion? : (followers : ProfileFollower[]) => void) =>{
+
+        query( contractAddress, wallet, 
+            {"followers":{ "key" : "profile_"+ (wallet?.walletAddress ?? ""),
+            "start_after" : startAfter, "limit" : limit, 
+            }} ,(obj)=>{
+
+            if (obj instanceof Error){
+
+                if ( completion )
+                    completion([]);
+            }
+            else {
+
+                if ( completion )
+                    completion (obj.followers);
+                
+            }
+
+        });
         
     }
 
-    return {queryProfile} as const;
-    
+
+    const queryProfileFollowings = (
+        startAfter? : string, 
+        limit? : number, 
+        completion? : (followings : ProfileFollowing[]) => void) =>{
+
+        query( contractAddress, wallet, 
+            {"followings":{ "key" : "profile_"+ (wallet?.walletAddress ?? ""),
+            "start_after" : startAfter, "limit" : limit, 
+            }} ,(obj)=>{
+
+            if (obj instanceof Error){
+
+                if ( completion )
+                    completion([]);
+            }
+            else {
+
+                if ( completion )
+                    completion (obj.followings);
+                
+            }
+
+        });
+        
+    }
+
+    return {queryProfile, queryProfileFollowers, queryProfileFollowings} as const;
+
 }
