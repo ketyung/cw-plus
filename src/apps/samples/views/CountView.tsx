@@ -1,5 +1,6 @@
 import { FC , useEffect, useState} from "react";
-import useQuery from "../../contracts/profileContract/hooks/useQuery";
+import { abbNum } from "../../../common/utils/funcs";
+import useQuery from "../../../contracts/profileContract/hooks/useQuery";
 
 export enum CountType {
 
@@ -41,7 +42,7 @@ export const CountView : FC <CountViewProps> = ({type}) => {
 
     },[]);
 
-    return <div className="countView"><span className="count">{count}</span><br/>
+    return <div className="countView"><span className="count">{abbNum(count)}</span><br/>
     <span className="text">{type === CountType.followers ? "Followers" : "Following"}</span>
     </div>
 

@@ -1,6 +1,6 @@
 import { FC , useEffect, useState} from "react";
-import useQuery from "../../contracts/profileContract/hooks/useQuery";
-import { Profile } from "../../contracts/profileContract/models";
+import useQuery from "../../../contracts/profileContract/hooks/useQuery";
+import { Profile } from "../../../contracts/profileContract/models";
 import { EnvironmentFilled } from "@ant-design/icons";
 import { CountView, CountType } from "./CountView";
 import './css/ProfileView.css';
@@ -15,8 +15,6 @@ export const ProfileView : FC = () => {
 
         queryProfile((p)=>{
             setProfile(p);
-
-            console.log("p::", p);
         });
 
     },[]);

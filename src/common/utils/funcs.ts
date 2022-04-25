@@ -53,4 +53,9 @@ export const shortenStringTo = (str : string, length : number = 32, inBetween : 
       str.substring(0, halfLen) + inBetween + 
       str.substring(str.length - halfLen, str.length)
     );
-};
+}
+
+export const abbNum = ( num : number) : string => {
+
+  return Intl.NumberFormat('en', { notation: 'compact' }).format(num);
+}

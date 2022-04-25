@@ -1,6 +1,6 @@
 .profileView {
 
-    max-width:300px;
+    max-width:320px;
     background-color:black ;
     border-radius: 20px;
     color:white;
@@ -27,7 +27,7 @@
 .profileView .countView {
 
     width:100px;
-    background-color: #236 ;
+    background-color: #223 ;
     border-radius: 20px;
     color:white;
     display: inline-block;
