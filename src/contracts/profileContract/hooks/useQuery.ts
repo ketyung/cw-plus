@@ -9,9 +9,7 @@ export default function useQuery() {
 
     const wallet = useConnectedWallet();
 
-
     const profileKey = "profile_"+ (wallet?.walletAddress ?? "");
-
     
     const queryProfile = async  (completion? : (profile : Profile ) => void) =>{
 

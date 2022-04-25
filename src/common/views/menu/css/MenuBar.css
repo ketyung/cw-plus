@@ -1,0 +1,8 @@
+.wallet-bar {
+    width:100%;
+    padding:1px 5px 20px 5px;
+    text-align: right;
+    margin:auto;
+    background:#112;
+    height:60px;
+}

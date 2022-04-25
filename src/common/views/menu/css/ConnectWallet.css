@@ -1,0 +1,12 @@
+.connect-menu-item {
+    border-radius: 6px;
+    font-weight: 500;
+    margin:auto;
+}
+
+.connect-menu-item:hover {
+    border-bottom: 2px solid transparent !important;
+    border-radius: 6px;
+    font-weight: 500;
+    margin:auto;
+}
