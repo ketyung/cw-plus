@@ -19,8 +19,6 @@ export const EditProfileView : FC <EditProfileProps> = ({
 
     const { TextArea } = Input;
 
-    let tmpProfile : Profile | undefined;
-
     const {queryProfile} = useQuery();
 
     const {updateProfile, loading} = useExec();
@@ -29,13 +27,20 @@ export const EditProfileView : FC <EditProfileProps> = ({
 
     const [txHash, setTxHash] = useState("");
 
+    const [name, setName] = useState("");
+
+    const [bio, setBio] = useState("");
+
+    const [location, setLocation] = useState("");
+
     useEffect(()=>{
 
         queryProfile((p)=>{
 
-            tmpProfile = p; 
+            setName(p.name);
+            setBio(p.bio ?? "");
+            setLocation(p.location ?? "");
 
-            console.log("tmpPro::", tmpProfile);
         });
 
     },[wallet?.walletAddress]);
@@ -46,34 +51,38 @@ export const EditProfileView : FC <EditProfileProps> = ({
         <tr>
             <td align="left" valign="top"  style={{width:"30%"}}><b>Name</b></td>
             <td align="left" valign="top"  style={{width:"70%"}}><Input type="text" 
-            style={{maxWidth:"200px", color:"black"}} value ={tmpProfile?.name}/></td>
+            style={{maxWidth:"200px", color:"black"}} value ={name}/></td>
         </tr>
         <tr>
             <td align="left" valign="top"  style={{width:"30%"}}><b>Bio</b></td>
             <td align="left" valign="top"  style={{width:"70%"}}><TextArea 
-            cols={60} rows={3} style={{color:"black"}} value={tmpProfile?.bio}/></td>
+            cols={60} rows={3} style={{color:"black"}} value={bio}/></td>
         </tr>
         <tr>
             <td align="left" valign="top"  style={{width:"30%"}}><b>Location</b></td>
             <td align="left" valign="top"  style={{width:"70%"}}><Input type="text" 
-            style={{maxWidth:"120px", color:"black"}} value={tmpProfile?.bio}/></td>
+            style={{maxWidth:"120px", color:"black"}} value={location}/></td>
         </tr>
         <tr>
             <td align="center" colSpan={2}>
                 <Button shape="round" onClick={async ()=>{
 
-                    if (tmpProfile) {
+                   
+                    await updateProfile({
+                        name : name, 
+                        wallet_address : wallet?.walletAddress ?? "",
+                        bio : bio,
+                        location : location,
+                    }, (txInfo)=>{
 
-                        await updateProfile(tmpProfile, (txInfo)=>{
-
-                            if ( txInfo instanceof Error){
-                                error(txInfo.message, 5);
-                            }
-                            else {
-                                setTxHash(txInfo.txhash);
-                            }
-                        });
-                    }
+                        if ( txInfo instanceof Error){
+                            error(txInfo.message, 5);
+                        }
+                        else {
+                            setTxHash(txInfo.txhash);
+                        }
+                    });
+                
                     
                     
                 }}>Update</Button>
