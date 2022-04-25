@@ -37,7 +37,7 @@ export const MenuView : React.FC = () => {
 
 
     return  <span>
-        <div style={{backgroundColor:"#789", marginTop:"10px"}}>
+        <div style={{backgroundColor:"#789", marginTop:"12px"}}>
              <span style={{color:"white",marginLeft:"10px",float:"left"}}> 
              <Button shape="circle" style={{width:"20px",height:"30px"}} onClick={()=>{
                 copy(connectedWallet?.walletAddress ?? "");

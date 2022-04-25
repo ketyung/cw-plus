@@ -84,7 +84,7 @@ export default function useQuery() {
         
     }
 
-    const followersCount = async ( completion? : (count : number) => void) =>{
+    const followersCount = async ( completion? : (count : number) => void, defaultValue : number = 100000 ) =>{
 
         await query( contractAddress, wallet, 
             {"followers_count":{ "key" : profileKey }} ,(obj)=>{
@@ -92,7 +92,7 @@ export default function useQuery() {
             if (obj instanceof Error){
 
                 if ( completion )
-                    completion(0);
+                    completion(defaultValue);
             }
             else {
 
@@ -104,7 +104,7 @@ export default function useQuery() {
         });
     }
 
-    const followingsCount = async ( completion? : (count : number) => void) =>{
+    const followingsCount = async ( completion? : (count : number) => void,  defaultValue : number = 100000) =>{
 
         await query( contractAddress, wallet, 
             {"followings_count":{ "key" : profileKey }} ,(obj)=>{
@@ -112,7 +112,7 @@ export default function useQuery() {
             if (obj instanceof Error){
 
                 if ( completion )
-                    completion(0);
+                    completion(defaultValue);
             }
             else {
 

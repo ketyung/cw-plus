@@ -7,4 +7,6 @@ export const DEFAULT_PROFILE : Profile = {
     hashtags : ["engineer","books"],
     bio : "Just a simple man",
     emails : ["johnapple@gmail.com", "johnmain@mainx.com"],
+    profile_image_url : "https://raw.githubusercontent.com/neworld-labs/token-list/master/assets/TestNet/neworld-labs.png",
+    location : "Paris",
 } 

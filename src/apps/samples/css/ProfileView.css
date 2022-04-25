@@ -1,0 +1,25 @@
+.profileView {
+
+    max-width:300px;
+    background-color:black ;
+    border-radius: 20px;
+    color:white;
+    text-align: left;
+    padding: 10px;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.profileView img {
+
+    float:left;
+    border-radius: 50px;
+    max-width: 60px;
+    max-height: 60px;
+}
+
+.profileView .nameView {
+    padding:3px;
+    margin-left: 10px;
+    display:inline-block;
+}

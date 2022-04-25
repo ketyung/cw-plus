@@ -1,5 +1,6 @@
 export interface Link {
     name : string,
+
     value : string, 
 }
 
@@ -13,15 +14,17 @@ export interface Profile {
 
     bio? : string, 
 
+    location? : string, 
+
     hashtags? : string[], // up to 5
 
     emails? : string[], // up to 3, first email is the primary
 
     links? : Link[], 
 
-    date_created? : Date, 
+    date_created? : number, // date in timestamp, will need to convert JS Date type for display
 
-    date_updated? : Date, 
+    date_updated? : number, 
 
 }
 
@@ -39,22 +42,22 @@ export interface ProfileMediaType {
 
     url : string, 
 
-    date_created? : Date, 
+    date_created? : number, 
 
-    date_updated? : Date, 
+    date_updated? : number, 
 }
 
 export interface ProfileFollower {
 
     wallet_address : string, 
 
-    date_created? : Date, 
+    date_created? : number, 
 }
 
 export interface ProfileFollowing {
 
     wallet_address : string, 
 
-    date_created? : Date, 
+    date_created? : number, 
 }
 
