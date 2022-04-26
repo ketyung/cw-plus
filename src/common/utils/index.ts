@@ -1,5 +1,5 @@
 import { ConnectedWallet } from "@terra-money/wallet-provider";
-import { LCDClient, MsgExecuteContract, Fee, TxInfo } from "@terra-money/terra.js";
+import { LCDClient, MsgExecuteContract, Fee, TxInfo, Coins } from "@terra-money/terra.js";
 
 
 const sleep = (ms : number ) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -65,6 +65,49 @@ const handleTxResult = async (
   }
 }
 
+
+const fcdUrlBasedOn =( url : string) : string =>{
+
+    return url.replace("lcd", "fcd");
+
+}
+
+
+const tryObtainingLCDClient = async (wallet : ConnectedWallet) : Promise<LCDClient> =>{
+
+  try {
+    
+      let gasPriceURL = fcdUrlBasedOn(wallet.network.lcd) + "/v1/txs/gas_prices";
+
+      // console.log("gasPriceURL::", gasPriceURL);
+
+      const gasPrices = await (await fetch( gasPriceURL )).json();
+      const gasPricesCoins = new Coins(gasPrices);
+    
+      const lcd = new LCDClient({
+        URL: wallet.network.lcd,
+        chainID: wallet.network.chainID,
+        gasPrices: gasPricesCoins,
+        gasAdjustment: "1.5",
+      });
+
+      return lcd;
+  }
+  catch( e : any){
+
+
+     // console.log("error.obtaining.lcdClient :", e);
+
+      const lcd = new LCDClient({
+        URL: wallet.network.lcd,
+        chainID: wallet.network.chainID,
+      });
+
+      return lcd;
+  }
+    
+}
+
 export const execute = async (
   contractAddress : string, 
   wallet : ConnectedWallet | undefined, 
@@ -82,11 +125,8 @@ export const execute = async (
       setLoading(true);
 
 
-    const lcd = new LCDClient({
-      URL: wallet.network.lcd,
-      chainID: wallet.network.chainID,
-    });
-
+  
+    const lcd = await tryObtainingLCDClient(wallet);
   
     try {
 
